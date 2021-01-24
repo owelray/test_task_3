@@ -1,0 +1,7 @@
+FORM_RECTANGULAR = 0
+FORM_OVAL = 1
+
+TABLE_FORMS = (
+    (FORM_RECTANGULAR, 'Rectangular'),
+    (FORM_OVAL, 'Oval')
+)

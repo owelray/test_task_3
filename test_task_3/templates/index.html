@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static "/css/styles.css" %}">
+    <meta charset="UTF-8">
+</head>
+    <body>
+        <h1> test </h1><br>
+        <div class='date-form'>
+            <form method="POST" name="date_form">
+               {% csrf_token %}
+               {{ form.as_p }}
+               <input type="submit" name='submit' value="Publish"></br></br>
+               <input type="submit" name='previous' value="Previous day">
+               <input type="submit" name='current' value="Today">
+               <input type="submit" name='next' value="Next day">
+        </div>
+        <div class='scheme'>
+        {% for table in tables %}
+            {% if table.form == 1 %}
+            {% if table in booked %}
+            <div class='table oval' style="height: {{ table.height }}%; width: {{ table.width }}%; background-color: red;" value='{{ table.id }}'></div>
+            {% else %}
+            <div class='table oval' style="height: {{ table.height }}%; width: {{ table.width }}%;" value='{{ table.id }}'></div>
+            {% endif %}
+            {% elif table.form == 0 %}
+            {% if table in booked %}
+            <div class='table rectangular' style="height: {{ table.height }}%; width: {{ table.width }}%; background-color: red;" value='{{ table.id }}'></div>
+            {% else %}
+            <div class='table rectangular' style="height: {{ table.height }}%; width: {{ table.width }}%;" value='{{ table.id }}'></div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+        </div>
+        <div class='submit-request'>
+        <div id='book-form' class='book-form'>
+        {{ submit_form.as_p }}
+        <input type='hidden' name='tables' id='tables'>
+        <input type='submit' name='request' value='Book'>
+        </div>
+        </div>
+    </body>
+    <script src='/static/js/script.js'></script>
+</html>
